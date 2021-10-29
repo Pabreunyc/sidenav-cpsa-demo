@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('%cLoginComponent','background:green;color:white');
-    console.log('loggedIn', this.authService.isLoggedIn);
+    console.log('loggedIn', this.authService.isLoggedIn());
   }
 
   toggleLogin(evt) {

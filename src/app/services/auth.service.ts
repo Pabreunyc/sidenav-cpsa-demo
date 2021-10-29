@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
+interface IPerson {
+  id:number;
+  name: string;
+}
+class Person implements IPerson{
+  id: number = 0;
+  name: string = '';
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -23,4 +31,9 @@ export class AuthService {
     return this._isLoggedIn.value;
   }
   
+  newPerson(body: Person): Observable<Person> {
+    return this.httpService.post('/people', JSON.stringify(body)).pipe
+      map(value => Object.assign(new Person(), value)
+    );
+  }
 }
